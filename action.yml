@@ -1,0 +1,34 @@
+name: 'Issue assign all collaborators'
+description: 'Assign all collaborators to issues in repository'
+author: 'ambersun1234'
+inputs: 
+  owner:
+    description: 'The owner of this repository'
+    required: true
+    default: ${{ github.repository_owner }}
+  repository:
+    description: 'The repo name of this repository'
+    required: true
+    default: ${{ github.repository }}
+  ref:
+    description: 'The ref which triggered the workflow run'
+    required: true
+    default: ${{ github.ref }}
+  api_url:
+    description: 'The GitHub REST API url'
+    required: true
+    default: ${{ github.api_url }}
+  token:
+    description: 'This is GitHub token'
+    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
+  
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.owner }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.ref }}
+    - ${{ inputs.api_url }}
+    - ${{ inputs.token }}

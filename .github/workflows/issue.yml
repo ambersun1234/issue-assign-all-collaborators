@@ -1,0 +1,11 @@
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  issue-assign-all-collaborators:
+    runs-on: ubuntu-latest
+    name: Auto assign collaborators
+    steps:
+      - name: Run issue assign all collaborators
+        uses: ./
