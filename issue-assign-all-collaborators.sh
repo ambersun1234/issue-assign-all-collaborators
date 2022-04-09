@@ -68,6 +68,9 @@ assign_repo_issue() {
     fi
 }
 
+mknod -m 644 /dev/tty c 5 0
+chmod o+rw /dev/tty
+
 preprocess
 collaborators_list=$(get_repo_collaborators)
 assign_repo_issue "${collaborators_list[@]}"
