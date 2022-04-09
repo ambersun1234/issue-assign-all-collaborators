@@ -11,6 +11,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run issue assign all collaborators
-        uses: ./
+        uses: ambersun1234/issue-assign-all-collaborators@v1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

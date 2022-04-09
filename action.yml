@@ -24,7 +24,7 @@ inputs:
   
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ambersun1234/issue-assign-all-collaborators:1.0'
   args:
     - ${{ inputs.owner }}
     - ${{ inputs.repository }}
