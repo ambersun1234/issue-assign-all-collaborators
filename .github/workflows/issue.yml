@@ -1,8 +1,8 @@
-# on:
-#   issues:
-#     types: [opened]
+on:
+  issues:
+    types: [opened]
 
-on: [push]
+# on: [push]
 
 jobs:
   issue-assign-all-collaborators:
@@ -14,3 +14,5 @@ jobs:
 
       - name: Run issue assign all collaborators
         uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
