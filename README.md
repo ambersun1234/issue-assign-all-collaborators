@@ -26,8 +26,11 @@ jobs:
 If things goes right, you will see the following text on GitHub Action
 ```
 Successfully get 'ambersun1234/issue-assign-all-collaborators' repository collaborators
-Successfully assign "ambersun1234" to issue #7 assignee
+Successfully assign "ambersun1234" to issue #8 assignee
 ```
+
+For the result on issue side, you can checkout [#8](https://github.com/ambersun1234/issue-assign-all-collaborators/issues/8) for more detail
+
 Note that if there's more than one collaborators, this action will assign **all of the collaborator** to the issue
 
 # Docker hub
