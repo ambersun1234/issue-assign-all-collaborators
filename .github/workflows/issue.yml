@@ -1,11 +1,16 @@
-on:
-  issues:
-    types: [opened]
+# on:
+#   issues:
+#     types: [opened]
+
+on: [push]
 
 jobs:
   issue-assign-all-collaborators:
     runs-on: ubuntu-latest
     name: Auto assign collaborators
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Run issue assign all collaborators
         uses: ./
