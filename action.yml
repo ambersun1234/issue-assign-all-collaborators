@@ -10,10 +10,10 @@ inputs:
     description: 'The repo name of this repository'
     required: true
     default: ${{ github.repository }}
-  ref:
-    description: 'The ref which triggered the workflow run'
+  issue_num:
+    description: 'The issue number'
     required: true
-    default: ${{ github.ref }}
+    default: ${{ github.event.issue.number }}
   api_url:
     description: 'The GitHub REST API url'
     required: true
@@ -28,6 +28,6 @@ runs:
   args:
     - ${{ inputs.owner }}
     - ${{ inputs.repository }}
-    - ${{ inputs.ref }}
+    - ${{ inputs.issue_num }}
     - ${{ inputs.api_url }}
     - ${{ inputs.token }}

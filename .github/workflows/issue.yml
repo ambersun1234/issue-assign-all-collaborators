@@ -2,8 +2,6 @@ on:
   issues:
     types: [opened]
 
-# on: [push]
-
 jobs:
   issue-assign-all-collaborators:
     runs-on: ubuntu-latest

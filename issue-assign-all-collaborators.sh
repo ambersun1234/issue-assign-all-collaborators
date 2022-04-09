@@ -12,15 +12,13 @@ status_created='201'
 
 OWNER=${INPUT_OWNER}
 REPO=${INPUT_REPOSITORY}
-REF=${INPUT_REF}
+ISSUE_NUM=${INPUT_issue_num}
 API_URL=${INPUT_API_URL}
 TOKEN=${INPUT_TOKEN}
 REPO_NAME=
-ISSUE_NUM=
 
 preprocess() {
     REPO_NAME=$(echo ${REPO} | cut -d '/' -f 2)
-    ISSUE_NUM=$(echo ${REF} | cut -d '/' -f 3)
 }
 
 get_repo_collaborators() {
@@ -35,10 +33,10 @@ get_repo_collaborators() {
     IFS=$' \t\n'
 
     if [ ${status_code} == "${status_ok}" ]; then
-        echo -e "${GREEN}Successfully get '${OWNER}/${REPO}' repository collaborators${NC}" > /dev/tty
+        echo -e "${GREEN}Successfully get '${OWNER}/${REPO}' repository collaborators${NC}" >&2
     else
-        echo -e "${RED}ERROR: Failed to get '${OWNER}/${REPO}' repository collaborators${NC}" > /dev/tty
-        echo ${collaborators_response} > /dev/tty
+        echo -e "${RED}ERROR: Failed to get '${OWNER}/${REPO}' repository collaborators${NC}" >&2
+        echo ${collaborators_response} >&2
         exit 1
     fi
     echo $(echo ${collaborators_response} | jq '.[] | .login')
@@ -60,16 +58,13 @@ assign_repo_issue() {
     IFS=$' \t\n'
 
     if [ ${status_code} == "${status_created}" ]; then
-        echo -e "${GREEN}Successfully assign ${username_list} to issue #${ISSUE_NUM} assignee${NC}"  > /dev/tty
+        echo -e "${GREEN}Successfully assign ${username_list} to issue #${ISSUE_NUM} assignee${NC}"  >&2
     else
-        echo -e "${RED}ERROR: Failed to assign ${username_list} to issue #${ISSUE_NUM} assignee${NC}" > /dev/tty
-        echo ${assign_issue_response} > /dev/tty
+        echo -e "${RED}ERROR: Failed to assign ${username_list} to issue #${ISSUE_NUM} assignee${NC}" >&2
+        echo ${assign_issue_response} >&2
         exit 1
     fi
 }
-
-mknod -m 644 /dev/tty c 5 0
-chmod o+rw /dev/tty
 
 preprocess
 collaborators_list=$(get_repo_collaborators)
