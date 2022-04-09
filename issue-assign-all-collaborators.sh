@@ -12,7 +12,7 @@ status_created='201'
 
 OWNER=${INPUT_OWNER}
 REPO=${INPUT_REPOSITORY}
-ISSUE_NUM=${INPUT_issue_num}
+ISSUE_NUM=${INPUT_ISSUE_NUM}
 API_URL=${INPUT_API_URL}
 TOKEN=${INPUT_TOKEN}
 REPO_NAME=
@@ -25,7 +25,7 @@ get_repo_collaborators() {
     # https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators
     collaborators_response=$(
         curl -w "%{http_code}" -sH "Authorization: token ${TOKEN}" \
-        ${API_URL}repos/${OWNER}/${REPO_NAME}/collaborators
+        ${API_URL}/repos/${OWNER}/${REPO_NAME}/collaborators
     )
     IFS=' '
     status_code=$(echo ${collaborators_response} | tail -n 1)
@@ -33,9 +33,9 @@ get_repo_collaborators() {
     IFS=$' \t\n'
 
     if [ ${status_code} == "${status_ok}" ]; then
-        echo -e "${GREEN}Successfully get '${OWNER}/${REPO}' repository collaborators${NC}" >&2
+        echo -e "${GREEN}Successfully get '${REPO}' repository collaborators${NC}" >&2
     else
-        echo -e "${RED}ERROR: Failed to get '${OWNER}/${REPO}' repository collaborators${NC}" >&2
+        echo -e "${RED}ERROR: Failed to get '${REPO}' repository collaborators${NC}" >&2
         echo ${collaborators_response} >&2
         exit 1
     fi
@@ -51,7 +51,7 @@ assign_repo_issue() {
     assign_issue_response=$(
         curl -w "%{http_code}" -sH "Authorization: token ${TOKEN}" \
         -d "{\"assignees\":[${username_list}]}" \
-        ${API_URL}repos/${OWNER}/${REPO_NAME}/issues/${ISSUE_NUM}/assignees
+        ${API_URL}/repos/${OWNER}/${REPO_NAME}/issues/${ISSUE_NUM}/assignees
     )
     IFS=' '
     status_code=$(echo ${assign_issue_response} | tail -n 1)
