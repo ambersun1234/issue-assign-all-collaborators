@@ -5,7 +5,7 @@
 This action implements auto assign all collaborator to specific issue
 
 # How to use
-Create a workflow file under `.github/workflows` with following content
+Create a workflow yaml file under `.github/workflows` with following content
 ```yaml
 on:
   issues:
